@@ -18,6 +18,8 @@
             --gold: #D4AF37;
             --soft-gold: #E6D8A8;
             --white: #FFFFFF;
+            --green: #2E7D32;
+            --soft-green: #81C784;
         }
 
         * {
@@ -31,7 +33,7 @@
             background-color: var(--bg-navy);
             color: var(--soft-gold);
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
         }
 
         /* ========== Main Layout ========== */
@@ -40,7 +42,7 @@
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 20px;
             justify-content: center;
             align-items: flex-start;
         }
@@ -49,107 +51,198 @@
         header {
             width: 100%;
             text-align: center;
-            padding: 20px 0 30px;
+            padding: 15px 0 20px;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         header h1 {
             font-family: 'Playfair Display', serif;
             color: var(--gold);
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 600;
             letter-spacing: 2px;
         }
 
         header p {
             color: var(--soft-gold);
-            margin-top: 8px;
-            font-size: 0.95rem;
+            margin-top: 6px;
+            font-size: 0.85rem;
             opacity: 0.8;
+        }
+
+        /* ========== Tab Navigation ========== */
+        .tab-navigation {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .tab-btn {
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: var(--soft-gold);
+            font-family: 'Lora', serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--gold), #B8962E);
+            color: var(--bg-navy);
+            border-color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Sub-tabs for Quiz */
+        .sub-tabs {
+            width: 100%;
+            display: none;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .sub-tabs.visible {
+            display: flex;
+        }
+
+        .sub-tab-btn {
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 6px;
+            color: var(--soft-gold);
+            font-family: 'Lora', serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sub-tab-btn:hover {
+            border-color: var(--gold);
+        }
+
+        .sub-tab-btn.active {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+            color: var(--gold);
         }
 
         /* ========== Input Panel ========== */
         .input-panel {
             flex: 1;
-            min-width: 320px;
+            min-width: 300px;
             max-width: 450px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 12px;
-            padding: 25px;
+            padding: 20px;
         }
 
         .input-panel h2 {
             font-family: 'Playfair Display', serif;
             color: var(--gold);
-            font-size: 1.3rem;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
             text-align: center;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
             color: var(--soft-gold);
-            font-size: 0.9rem;
-            margin-bottom: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
             font-weight: 500;
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px 12px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 8px;
             color: var(--white);
             font-family: 'Lora', serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: border-color 0.3s ease;
         }
 
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: var(--bg-navy);
+            color: var(--white);
+        }
+
         .form-group input[type="file"] {
-            padding: 10px;
+            padding: 8px;
             cursor: pointer;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: var(--gold);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 70px;
         }
 
         /* Arabic input styling */
         .form-group textarea.arabic-input {
             font-family: 'Amiri', serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             direction: rtl;
             text-align: right;
             line-height: 1.8;
         }
 
+        /* Hidden form sections */
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
         /* ========== Preview Panel ========== */
         .preview-panel {
             flex: 1;
-            min-width: 320px;
+            min-width: 300px;
             max-width: 500px;
         }
 
         .preview-panel h2 {
             font-family: 'Playfair Display', serif;
             color: var(--gold);
-            font-size: 1.3rem;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
             text-align: center;
         }
 
@@ -178,18 +271,22 @@
             z-index: 0;
         }
 
-        /* Logo - Top Left */
+        /* Logo - Top Left - RESPONSIVE */
         .logo-container {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 3%;
+            left: 3%;
             z-index: 2;
+            width: 12%;
+            max-width: 70px;
+            min-width: 35px;
         }
 
         .logo {
-            width: 70px;
+            width: 100%;
             height: auto;
             display: block;
+            object-fit: contain;
         }
 
         /* Main content area */
@@ -202,55 +299,135 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 60px 30px 20px;
+            padding: 12% 6% 4%;
         }
 
-        /* Arabic Ayah - LARGER SIZE */
+        /* Type Badge */
+        .type-badge {
+            position: absolute;
+            top: 3%;
+            right: 3%;
+            background: var(--gold);
+            color: var(--bg-navy);
+            padding: 1.5% 3%;
+            border-radius: 4px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(8px, 2.5vw, 12px);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        /* Arabic Text - RESPONSIVE */
         .arabic-ayah {
             font-family: 'Amiri', serif;
-            font-size: 2.3rem;
+            font-size: clamp(1.2rem, 5vw, 2.3rem);
             color: var(--gold);
             direction: rtl;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            line-height: 1.7;
+            margin-bottom: 4%;
             font-weight: 700;
+            padding: 0 2%;
         }
 
-        /* English Translation */
+        /* English Translation - RESPONSIVE */
         .english-translation {
             font-family: 'Playfair Display', serif;
-            font-size: 1rem;
+            font-size: clamp(0.75rem, 3vw, 1rem);
             color: var(--soft-gold);
             font-style: italic;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            padding: 0 10px;
+            line-height: 1.5;
+            margin-bottom: 4%;
+            padding: 0 4%;
         }
 
         /* Decorative divider */
         .divider {
-            width: 60px;
+            width: 15%;
+            min-width: 40px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 10px auto;
+            margin: 2% auto;
         }
 
-        /* Ayah reference */
+        /* Reference - RESPONSIVE */
         .reference {
             font-family: 'Playfair Display', serif;
-            font-size: 0.9rem;
+            font-size: clamp(0.65rem, 2.5vw, 0.9rem);
             color: var(--gold);
             letter-spacing: 1px;
+        }
+
+        /* Quiz specific styles */
+        .quiz-question {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+            color: var(--gold);
+            line-height: 1.5;
+            margin-bottom: 5%;
+            font-weight: 600;
+        }
+
+        .quiz-options {
+            width: 90%;
+            text-align: left;
+        }
+
+        .quiz-option {
+            font-family: 'Lora', serif;
+            font-size: clamp(0.7rem, 2.8vw, 0.95rem);
+            color: var(--soft-gold);
+            padding: 2.5% 4%;
+            margin-bottom: 2%;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 6px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .quiz-option.arabic {
+            font-family: 'Amiri', serif;
+            direction: rtl;
+            text-align: right;
+            border-left: none;
+            border-right: 3px solid var(--gold);
+            font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+        }
+
+        /* Hidayat/Info post styles */
+        .info-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            color: var(--gold);
+            margin-bottom: 4%;
+            font-weight: 600;
+        }
+
+        .info-content {
+            font-family: 'Lora', serif;
+            font-size: clamp(0.75rem, 3vw, 1rem);
+            color: var(--soft-gold);
+            line-height: 1.6;
+            padding: 0 5%;
+            text-align: center;
+        }
+
+        .info-arabic {
+            font-family: 'Amiri', serif;
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            color: var(--gold);
+            direction: rtl;
+            line-height: 1.7;
+            margin-bottom: 4%;
         }
 
         /* ========== Bottom Contact Bar ========== */
         .bottom-bar {
             background-color: var(--gold);
-            padding: 12px 20px;
+            padding: 2.5% 4%;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 4%;
             flex-wrap: wrap;
             position: relative;
             z-index: 2;
@@ -259,41 +436,45 @@
         .bottom-bar-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             color: var(--bg-navy);
             font-family: 'Lora', serif;
-            font-size: 0.65rem;
+            font-size: clamp(6px, 2vw, 10px);
         }
 
         .bottom-bar-item svg {
             flex-shrink: 0;
+            width: clamp(10px, 3vw, 14px);
+            height: clamp(10px, 3vw, 14px);
         }
 
         .social-icons {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             color: var(--bg-navy);
             font-family: 'Lora', serif;
-            font-size: 0.65rem;
+            font-size: clamp(6px, 2vw, 10px);
         }
 
         .social-icons svg {
             flex-shrink: 0;
+            width: clamp(12px, 3.5vw, 16px);
+            height: clamp(12px, 3.5vw, 16px);
         }
 
         /* ========== Download Button ========== */
         .download-btn {
             display: block;
             width: 100%;
-            margin-top: 20px;
-            padding: 15px 25px;
+            margin-top: 15px;
+            padding: 12px 20px;
             background: linear-gradient(135deg, var(--gold), #B8962E);
             color: var(--bg-navy);
             border: none;
             border-radius: 8px;
             font-family: 'Playfair Display', serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -312,37 +493,54 @@
 
         /* ========== Responsive Design ========== */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 1.3rem;
+            }
+
             .container {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
 
             .input-panel,
             .preview-panel {
                 max-width: 100%;
                 width: 100%;
+                min-width: unset;
             }
 
-            .arabic-ayah {
-                font-size: 1.8rem;
+            .input-panel {
+                padding: 15px;
             }
 
-            .english-translation {
-                font-size: 0.9rem;
+            .tab-navigation {
+                gap: 6px;
             }
 
-            .logo {
-                width: 60px;
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 0.75rem;
             }
 
-            .bottom-bar {
-                gap: 10px;
-                padding: 10px 15px;
+            .form-group textarea.arabic-input {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .tab-btn {
+                padding: 7px 10px;
+                font-size: 0.7rem;
             }
 
-            .bottom-bar-item,
-            .social-icons {
-                font-size: 0.55rem;
+            .sub-tab-btn {
+                padding: 6px 10px;
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -354,44 +552,129 @@
         <p>Create beautiful Islamic social media posts</p>
     </header>
 
+    <!-- ========== Tab Navigation ========== -->
+    <div class="tab-navigation">
+        <button class="tab-btn active" data-tab="quran" onclick="switchTab('quran')">📖 Quran Ayah</button>
+        <button class="tab-btn" data-tab="hadees" onclick="switchTab('hadees')">📜 Hadees</button>
+        <button class="tab-btn" data-tab="quiz" onclick="switchTab('quiz')">❓ Quranic Quiz</button>
+        <button class="tab-btn" data-tab="hidayat" onclick="switchTab('hidayat')">💡 Hidayat</button>
+    </div>
+
+    <!-- Sub-tabs for Quiz -->
+    <div class="sub-tabs" id="quizSubTabs">
+        <button class="sub-tab-btn active" data-subtab="quiz-english" onclick="switchSubTab('quiz-english')">English Quiz</button>
+        <button class="sub-tab-btn" data-subtab="quiz-arabic" onclick="switchSubTab('quiz-arabic')">Arabic Quiz</button>
+    </div>
+
     <div class="container">
         <!-- ========== Input Panel ========== -->
         <div class="input-panel">
             <h2>Edit Your Post</h2>
 
-            <!-- Logo Upload -->
+            <!-- Logo Upload (Common) -->
             <div class="form-group">
                 <label for="logoInput">Upload Logo (PNG/JPG)</label>
                 <input type="file" id="logoInput" accept="image/*">
             </div>
 
-            <!-- Arabic Ayah Input -->
-            <div class="form-group">
-                <label for="arabicInput">Arabic Ayah</label>
-                <textarea 
-                    id="arabicInput" 
-                    class="arabic-input"
-                    rows="3"
-                >وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰ</textarea>
+            <!-- ===== QURAN AYAH FORM ===== -->
+            <div class="form-section active" id="form-quran">
+                <div class="form-group">
+                    <label for="arabicInput">Arabic Ayah</label>
+                    <textarea id="arabicInput" class="arabic-input" rows="3">وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰ</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="englishInput">English Translation</label>
+                    <textarea id="englishInput" rows="3">"And surely your Lord will give you so much that you will be pleased."</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="referenceInput">Ayah Reference</label>
+                    <input type="text" id="referenceInput" value="Surah Ad-Duḥā | 93:5">
+                </div>
             </div>
 
-            <!-- English Translation Input -->
-            <div class="form-group">
-                <label for="englishInput">English Translation</label>
-                <textarea 
-                    id="englishInput" 
-                    rows="3"
-                >"And surely your Lord will give you so much that you will be pleased."</textarea>
+            <!-- ===== HADEES FORM ===== -->
+            <div class="form-section" id="form-hadees">
+                <div class="form-group">
+                    <label for="hadeesArabicInput">Arabic Hadees</label>
+                    <textarea id="hadeesArabicInput" class="arabic-input" rows="3">إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="hadeesEnglishInput">English Translation</label>
+                    <textarea id="hadeesEnglishInput" rows="3">"Actions are judged by intentions."</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="hadeesReferenceInput">Hadees Reference</label>
+                    <input type="text" id="hadeesReferenceInput" value="Sahih Bukhari | Hadith 1">
+                </div>
             </div>
 
-            <!-- Reference Input -->
-            <div class="form-group">
-                <label for="referenceInput">Ayah Reference</label>
-                <input 
-                    type="text" 
-                    id="referenceInput" 
-                    value="Surah Ad-Duḥā | 93:5"
-                >
+            <!-- ===== QUIZ ENGLISH FORM ===== -->
+            <div class="form-section" id="form-quiz-english">
+                <div class="form-group">
+                    <label for="quizQuestionEn">Quiz Question (English)</label>
+                    <textarea id="quizQuestionEn" rows="2">Which Surah is known as the "Heart of the Quran"?</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="quizOptionA">Option A</label>
+                    <input type="text" id="quizOptionA" value="Surah Al-Fatiha">
+                </div>
+                <div class="form-group">
+                    <label for="quizOptionB">Option B</label>
+                    <input type="text" id="quizOptionB" value="Surah Yasin">
+                </div>
+                <div class="form-group">
+                    <label for="quizOptionC">Option C</label>
+                    <input type="text" id="quizOptionC" value="Surah Al-Baqarah">
+                </div>
+                <div class="form-group">
+                    <label for="quizOptionD">Option D</label>
+                    <input type="text" id="quizOptionD" value="Surah Al-Ikhlas">
+                </div>
+            </div>
+
+            <!-- ===== QUIZ ARABIC FORM ===== -->
+            <div class="form-section" id="form-quiz-arabic">
+                <div class="form-group">
+                    <label for="quizQuestionAr">Quiz Question (Arabic)</label>
+                    <textarea id="quizQuestionAr" class="arabic-input" rows="2">ما هي السورة التي تُسمى قلب القرآن؟</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="quizOptionArA">Option A (Arabic)</label>
+                    <input type="text" id="quizOptionArA" class="arabic-input" style="font-size:1.1rem;" value="سورة الفاتحة">
+                </div>
+                <div class="form-group">
+                    <label for="quizOptionArB">Option B (Arabic)</label>
+                    <input type="text" id="quizOptionArB" class="arabic-input" style="font-size:1.1rem;" value="سورة يس">
+                </div>
+                <div class="form-group">
+                    <label for="quizOptionArC">Option C (Arabic)</label>
+                    <input type="text" id="quizOptionArC" class="arabic-input" style="font-size:1.1rem;" value="سورة البقرة">
+                </div>
+                <div class="form-group">
+                    <label for="quizOptionArD">Option D (Arabic)</label>
+                    <input type="text" id="quizOptionArD" class="arabic-input" style="font-size:1.1rem;" value="سورة الإخلاص">
+                </div>
+            </div>
+
+            <!-- ===== HIDAYAT/INFO FORM ===== -->
+            <div class="form-section" id="form-hidayat">
+                <div class="form-group">
+                    <label for="hidayatTitle">Title</label>
+                    <input type="text" id="hidayatTitle" value="The Power of Dua">
+                </div>
+                <div class="form-group">
+                    <label for="hidayatArabic">Arabic Text (Optional)</label>
+                    <textarea id="hidayatArabic" class="arabic-input" rows="2">ادْعُونِي أَسْتَجِبْ لَكُمْ</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="hidayatContent">Content / Message</label>
+                    <textarea id="hidayatContent" rows="4">Dua is the weapon of the believer. Never underestimate the power of sincere supplication to Allah. He hears every whisper of your heart.</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="hidayatSource">Source (Optional)</label>
+                    <input type="text" id="hidayatSource" value="Surah Ghafir | 40:60">
+                </div>
             </div>
 
             <!-- Download Button -->
@@ -406,7 +689,6 @@
 
             <!-- Post Preview Card -->
             <div class="post-preview" id="postPreview">
-                <!-- Pattern Overlay (as div instead of ::before for html2canvas) -->
                 <div class="pattern-overlay"></div>
 
                 <!-- Logo - Top Left -->
@@ -414,41 +696,28 @@
                     <img src="" alt="Logo" class="logo" id="logoImg">
                 </div>
 
+                <!-- Type Badge -->
+                <div class="type-badge" id="typeBadge">QURAN</div>
+
                 <!-- Main Content -->
-                <div class="post-content">
-                    <!-- Arabic Ayah Display -->
-                    <div class="arabic-ayah" id="arabicDisplay">
-                        وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰ
-                    </div>
-
-                    <!-- English Translation Display -->
-                    <div class="english-translation" id="englishDisplay">
-                        "And surely your Lord will give you so much that you will be pleased."
-                    </div>
-
-                    <!-- Decorative Divider -->
-                    <div class="divider"></div>
-
-                    <!-- Reference Display -->
-                    <div class="reference" id="referenceDisplay">
-                        Surah Ad-Duḥā | 93:5
-                    </div>
+                <div class="post-content" id="postContent">
+                    <!-- Content will be dynamically updated -->
                 </div>
 
                 <!-- Bottom Contact Bar -->
                 <div class="bottom-bar">
                     <div class="bottom-bar-item">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
                         <span>wisdomquranacademy.netlify.app</span>
                     </div>
                     <div class="bottom-bar-item">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2"/><polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2"/><polyline points="22,6 12,13 2,6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
                         <span>quranwisdomacademy5@gmail.com</span>
                     </div>
                     <div class="social-icons">
                         <span>Follow us</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                     </div>
                 </div>
             </div>
@@ -457,69 +726,179 @@
 
     <!-- ========== JavaScript ========== -->
     <script>
-        // ========== Get DOM Elements ==========
-        const arabicInput = document.getElementById('arabicInput');
-        const englishInput = document.getElementById('englishInput');
-        const referenceInput = document.getElementById('referenceInput');
-        const logoInput = document.getElementById('logoInput');
+        // ========== State Management ==========
+        let currentTab = 'quran';
+        let currentSubTab = 'quiz-english';
 
-        const arabicDisplay = document.getElementById('arabicDisplay');
-        const englishDisplay = document.getElementById('englishDisplay');
-        const referenceDisplay = document.getElementById('referenceDisplay');
-        const logoImg = document.getElementById('logoImg');
-        const logoContainer = document.getElementById('logoContainer');
+        // ========== Tab Switching ==========
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tab);
+            });
 
-        // ========== Live Update Functions ==========
-        
-        // Update Arabic Ayah in preview
-        arabicInput.addEventListener('input', function() {
-            arabicDisplay.textContent = this.value || 'Arabic Ayah';
-        });
+            // Hide all form sections
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
 
-        // Update English Translation in preview
-        englishInput.addEventListener('input', function() {
-            englishDisplay.textContent = this.value || 'English Translation';
-        });
-
-        // Update Reference in preview
-        referenceInput.addEventListener('input', function() {
-            referenceDisplay.textContent = this.value || 'Reference';
-        });
-
-        // Handle logo upload - convert to base64 to avoid CORS issues
-        logoInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    logoImg.src = event.target.result; // Base64 data URL
-                    logoContainer.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
+            // Show appropriate form
+            if (tab === 'quiz') {
+                document.getElementById('quizSubTabs').classList.add('visible');
+                document.getElementById(`form-${currentSubTab}`).classList.add('active');
+            } else {
+                document.getElementById('quizSubTabs').classList.remove('visible');
+                document.getElementById(`form-${tab}`).classList.add('active');
             }
-        });
 
-        // ========== Direct Image Download Function ==========
+            // Update preview
+            updatePreview();
+        }
+
+        function switchSubTab(subtab) {
+            currentSubTab = subtab;
+            
+            // Update sub-tab buttons
+            document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.subtab === subtab);
+            });
+
+            // Hide all form sections and show selected
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`form-${subtab}`).classList.add('active');
+
+            // Update preview
+            updatePreview();
+        }
+
+        // ========== Preview Update Functions ==========
+        function updatePreview() {
+            const postContent = document.getElementById('postContent');
+            const typeBadge = document.getElementById('typeBadge');
+
+            if (currentTab === 'quran') {
+                typeBadge.textContent = 'QURAN';
+                postContent.innerHTML = `
+                    <div class="arabic-ayah" id="arabicDisplay">${document.getElementById('arabicInput').value}</div>
+                    <div class="english-translation" id="englishDisplay">${document.getElementById('englishInput').value}</div>
+                    <div class="divider"></div>
+                    <div class="reference" id="referenceDisplay">${document.getElementById('referenceInput').value}</div>
+                `;
+            } else if (currentTab === 'hadees') {
+                typeBadge.textContent = 'HADEES';
+                postContent.innerHTML = `
+                    <div class="arabic-ayah" id="hadeesArabicDisplay">${document.getElementById('hadeesArabicInput').value}</div>
+                    <div class="english-translation" id="hadeesEnglishDisplay">${document.getElementById('hadeesEnglishInput').value}</div>
+                    <div class="divider"></div>
+                    <div class="reference" id="hadeesReferenceDisplay">${document.getElementById('hadeesReferenceInput').value}</div>
+                `;
+            } else if (currentTab === 'quiz') {
+                typeBadge.textContent = 'QUIZ';
+                if (currentSubTab === 'quiz-english') {
+                    postContent.innerHTML = `
+                        <div class="quiz-question" id="quizQuestionDisplay">${document.getElementById('quizQuestionEn').value}</div>
+                        <div class="quiz-options">
+                            <div class="quiz-option" id="optionADisplay">A. ${document.getElementById('quizOptionA').value}</div>
+                            <div class="quiz-option" id="optionBDisplay">B. ${document.getElementById('quizOptionB').value}</div>
+                            <div class="quiz-option" id="optionCDisplay">C. ${document.getElementById('quizOptionC').value}</div>
+                            <div class="quiz-option" id="optionDDisplay">D. ${document.getElementById('quizOptionD').value}</div>
+                        </div>
+                    `;
+                } else {
+                    postContent.innerHTML = `
+                        <div class="quiz-question arabic-ayah" style="direction:rtl;" id="quizQuestionArDisplay">${document.getElementById('quizQuestionAr').value}</div>
+                        <div class="quiz-options">
+                            <div class="quiz-option arabic" id="optionArADisplay">أ. ${document.getElementById('quizOptionArA').value}</div>
+                            <div class="quiz-option arabic" id="optionArBDisplay">ب. ${document.getElementById('quizOptionArB').value}</div>
+                            <div class="quiz-option arabic" id="optionArCDisplay">ج. ${document.getElementById('quizOptionArC').value}</div>
+                            <div class="quiz-option arabic" id="optionArDDisplay">د. ${document.getElementById('quizOptionArD').value}</div>
+                        </div>
+                    `;
+                }
+            } else if (currentTab === 'hidayat') {
+                typeBadge.textContent = 'HIDAYAT';
+                const arabicText = document.getElementById('hidayatArabic').value;
+                const source = document.getElementById('hidayatSource').value;
+                postContent.innerHTML = `
+                    <div class="info-title" id="hidayatTitleDisplay">${document.getElementById('hidayatTitle').value}</div>
+                    ${arabicText ? `<div class="info-arabic" id="hidayatArabicDisplay">${arabicText}</div>` : ''}
+                    <div class="info-content" id="hidayatContentDisplay">${document.getElementById('hidayatContent').value}</div>
+                    ${source ? `<div class="divider"></div><div class="reference" id="hidayatSourceDisplay">${source}</div>` : ''}
+                `;
+            }
+        }
+
+        // ========== Live Input Listeners ==========
+        function setupInputListeners() {
+            // Quran inputs
+            ['arabicInput', 'englishInput', 'referenceInput'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    if (currentTab === 'quran') updatePreview();
+                });
+            });
+
+            // Hadees inputs
+            ['hadeesArabicInput', 'hadeesEnglishInput', 'hadeesReferenceInput'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    if (currentTab === 'hadees') updatePreview();
+                });
+            });
+
+            // Quiz English inputs
+            ['quizQuestionEn', 'quizOptionA', 'quizOptionB', 'quizOptionC', 'quizOptionD'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    if (currentTab === 'quiz' && currentSubTab === 'quiz-english') updatePreview();
+                });
+            });
+
+            // Quiz Arabic inputs
+            ['quizQuestionAr', 'quizOptionArA', 'quizOptionArB', 'quizOptionArC', 'quizOptionArD'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    if (currentTab === 'quiz' && currentSubTab === 'quiz-arabic') updatePreview();
+                });
+            });
+
+            // Hidayat inputs
+            ['hidayatTitle', 'hidayatArabic', 'hidayatContent', 'hidayatSource'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    if (currentTab === 'hidayat') updatePreview();
+                });
+            });
+
+            // Logo upload
+            document.getElementById('logoInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        document.getElementById('logoImg').src = event.target.result;
+                        document.getElementById('logoContainer').style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // ========== Download Function ==========
         async function downloadPost() {
             const btn = document.getElementById('downloadBtn');
             const originalText = btn.textContent;
             
             try {
-                // Show loading state
                 btn.textContent = 'Generating image...';
                 btn.disabled = true;
 
                 const postElement = document.getElementById('postPreview');
                 
-                // Wait for fonts to be ready
                 await document.fonts.ready;
-                
-                // Small delay to ensure everything is rendered
                 await new Promise(resolve => setTimeout(resolve, 100));
                 
-                // Use html2canvas
                 const canvas = await html2canvas(postElement, {
-                    scale: 2,
+                    scale: 3,
                     useCORS: true,
                     allowTaint: false,
                     backgroundColor: '#0B1F3B',
@@ -527,23 +906,22 @@
                     imageTimeout: 0
                 });
 
-                // Resize to exactly 1080x1080 for Instagram
                 const finalCanvas = document.createElement('canvas');
                 finalCanvas.width = 1080;
                 finalCanvas.height = 1080;
                 const ctx = finalCanvas.getContext('2d');
                 ctx.drawImage(canvas, 0, 0, 1080, 1080);
 
-                // Download using data URL (more compatible)
                 const dataUrl = finalCanvas.toDataURL('image/png');
                 const link = document.createElement('a');
                 link.href = dataUrl;
-                link.download = 'quran-wisdom-post.png';
+                
+                const filename = `quran-wisdom-${currentTab}${currentTab === 'quiz' ? '-' + currentSubTab.replace('quiz-', '') : ''}-post.png`;
+                link.download = filename;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
 
-                // Success feedback
                 btn.textContent = '✓ Downloaded!';
                 setTimeout(() => {
                     btn.textContent = originalText;
@@ -560,6 +938,12 @@
                 }, 2000);
             }
         }
+
+        // ========== Initialize ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            setupInputListeners();
+            updatePreview();
+        });
     </script>
 </body>
 </html>
