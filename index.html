@@ -271,14 +271,82 @@
             z-index: 0;
         }
 
+        /* Watermark Pattern - Tiled Logo Background */
+        .watermark-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.06;
+            background-repeat: repeat;
+            background-size: 90px 90px;
+            display: none;
+        }
+
+        /* Watermark Center - Single Logo in Center */
+        .watermark-center {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.09;
+            max-width: 520px;
+
+        }
+
+        .watermark-center-logo {
+            width: 100%;
+            height: 100%;
+        }
+
+        .watermark-center-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(0.5rem, 2vw, 0.7rem);
+            color: var(--gold);
+            text-align: center;
+            margin-top: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        /* Tagline Watermark - Subtle text at bottom (for pattern mode) */
+        .watermark-tagline {
+            position: absolute;
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(0.45rem, 1.8vw, 0.65rem);
+            color: var(--gold);
+            text-align: center;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 400;
+            opacity: 0.35;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1;
+            display: none;
+        }
+
         /* Logo - Top Left - RESPONSIVE */
         .logo-container {
             position: absolute;
-            top: 3%;
-            left: 3%;
+            top: 1%;
+            left: 1%;
             z-index: 2;
-            width: 12%;
-            max-width: 70px;
+            width: 16%;
+            max-width: 170px;
             min-width: 35px;
         }
 
@@ -577,6 +645,15 @@
                 <input type="file" id="logoInput" accept="image/*">
             </div>
 
+            <!-- Watermark Style Selector -->
+            <div class="form-group">
+                <label for="watermarkStyle">Watermark Style</label>
+                <select id="watermarkStyle">
+                    <option value="pattern">Tiled Pattern</option>
+                    <option value="center">Single Center Logo</option>
+                </select>
+            </div>
+
             <!-- ===== QURAN AYAH FORM ===== -->
             <div class="form-section active" id="form-quran">
                 <div class="form-group">
@@ -690,6 +767,18 @@
             <!-- Post Preview Card -->
             <div class="post-preview" id="postPreview">
                 <div class="pattern-overlay"></div>
+
+                <!-- Watermark Pattern - Tiled Logo Background -->
+                <div class="watermark-pattern" id="watermarkPattern"></div>
+
+                <!-- Watermark Center - Single Logo -->
+                <div class="watermark-center" id="watermarkCenter">
+                    <img src="" alt="" class="watermark-center-logo" id="watermarkCenterLogo">
+                    <div class="watermark-center-tagline">Shaping the minds with the wisdom of Quran</div>
+                </div>
+                
+                <!-- Tagline Watermark (for pattern mode) -->
+                <div class="watermark-tagline" id="watermarkTagline">Shaping the minds with the wisdom of Quran</div>
 
                 <!-- Logo - Top Left -->
                 <div class="logo-container" id="logoContainer" style="display: none;">
@@ -875,12 +964,42 @@
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(event) {
+                        // Set logo in top-left corner
                         document.getElementById('logoImg').src = event.target.result;
                         document.getElementById('logoContainer').style.display = 'block';
+                        
+                        // Set both watermark styles (pattern + center)
+                        document.getElementById('watermarkPattern').style.backgroundImage = `url('${event.target.result}')`;
+                        document.getElementById('watermarkCenterLogo').src = event.target.result;
+                        
+                        // Apply current watermark style
+                        applyWatermarkStyle();
                     };
                     reader.readAsDataURL(file);
                 }
             });
+
+            // Watermark style selector
+            document.getElementById('watermarkStyle').addEventListener('change', applyWatermarkStyle);
+
+            function applyWatermarkStyle() {
+                const style = document.getElementById('watermarkStyle').value;
+                const hasLogo = document.getElementById('logoImg').src && document.getElementById('logoImg').src !== '';
+                
+                // Hide all watermarks first
+                document.getElementById('watermarkPattern').style.display = 'none';
+                document.getElementById('watermarkCenter').style.display = 'none';
+                document.getElementById('watermarkTagline').style.display = 'none';
+                
+                if (!hasLogo || document.getElementById('logoContainer').style.display === 'none') return;
+                
+                if (style === 'pattern') {
+                    document.getElementById('watermarkPattern').style.display = 'block';
+                    document.getElementById('watermarkTagline').style.display = 'block';
+                } else if (style === 'center') {
+                    document.getElementById('watermarkCenter').style.display = 'flex';
+                }
+            }
         }
 
         // ========== Download Function ==========
