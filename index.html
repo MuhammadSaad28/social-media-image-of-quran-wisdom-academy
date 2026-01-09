@@ -626,6 +626,7 @@
         <button class="tab-btn" data-tab="hadees" onclick="switchTab('hadees')">📜 Hadees</button>
         <button class="tab-btn" data-tab="quiz" onclick="switchTab('quiz')">❓ Quranic Quiz</button>
         <button class="tab-btn" data-tab="hidayat" onclick="switchTab('hidayat')">💡 Hidayat</button>
+        <button class="tab-btn" data-tab="custom" onclick="switchTab('custom')">✨ Custom</button>
     </div>
 
     <!-- Sub-tabs for Quiz -->
@@ -751,6 +752,22 @@
                 <div class="form-group">
                     <label for="hidayatSource">Source (Optional)</label>
                     <input type="text" id="hidayatSource" value="Surah Ghafir | 40:60">
+                </div>
+            </div>
+
+            <!-- ===== CUSTOM FORM (No Badge) ===== -->
+            <div class="form-section" id="form-custom">
+                <div class="form-group">
+                    <label for="customArabic">Arabic Text (Optional)</label>
+                    <textarea id="customArabic" class="arabic-input" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="customEnglish">English Text</label>
+                    <textarea id="customEnglish" rows="4">Enter your message here...</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="customSource">Source / Reference (Optional)</label>
+                    <input type="text" id="customSource" value="">
                 </div>
             </div>
 
@@ -918,7 +935,21 @@
                     <div class="info-content" id="hidayatContentDisplay">${document.getElementById('hidayatContent').value}</div>
                     ${source ? `<div class="divider"></div><div class="reference" id="hidayatSourceDisplay">${source}</div>` : ''}
                 `;
+            } else if (currentTab === 'custom') {
+                // Hide the badge for custom posts
+                typeBadge.style.display = 'none';
+                const arabicText = document.getElementById('customArabic').value;
+                const source = document.getElementById('customSource').value;
+                postContent.innerHTML = `
+                    ${arabicText ? `<div class="arabic-ayah" id="customArabicDisplay">${arabicText}</div>` : ''}
+                    <div class="english-translation" id="customEnglishDisplay" style="font-style: normal; font-size: clamp(0.85rem, 3.2vw, 1.1rem);">${document.getElementById('customEnglish').value}</div>
+                    ${source ? `<div class="divider"></div><div class="reference" id="customSourceDisplay">${source}</div>` : ''}
+                `;
+                return; // Skip showing badge
             }
+            
+            // Show badge for all other tabs
+            typeBadge.style.display = 'block';
         }
 
         // ========== Live Input Listeners ==========
@@ -955,6 +986,13 @@
             ['hidayatTitle', 'hidayatArabic', 'hidayatContent', 'hidayatSource'].forEach(id => {
                 document.getElementById(id).addEventListener('input', () => {
                     if (currentTab === 'hidayat') updatePreview();
+                });
+            });
+
+            // Custom inputs
+            ['customArabic', 'customEnglish', 'customSource'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    if (currentTab === 'custom') updatePreview();
                 });
             });
 
