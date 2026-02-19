@@ -488,6 +488,19 @@
             margin-bottom: 4%;
         }
 
+        /* Ramadan Series styles */
+        .ramadan-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 4.5vw, 1.7rem);
+            color: var(--gold);
+            margin-bottom: 6%;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 3%;
+        }
+
         /* ========== Bottom Contact Bar ========== */
         .bottom-bar {
             background-color: var(--gold);
@@ -626,6 +639,7 @@
         <button class="tab-btn" data-tab="hadees" onclick="switchTab('hadees')">📜 Hadees</button>
         <button class="tab-btn" data-tab="quiz" onclick="switchTab('quiz')">❓ Quranic Quiz</button>
         <button class="tab-btn" data-tab="hidayat" onclick="switchTab('hidayat')">💡 Hidayat</button>
+        <button class="tab-btn" data-tab="ramadan" onclick="switchTab('ramadan')">🌙 Ramadan Series</button>
         <button class="tab-btn" data-tab="custom" onclick="switchTab('custom')">✨ Custom</button>
     </div>
 
@@ -752,6 +766,26 @@
                 <div class="form-group">
                     <label for="hidayatSource">Source (Optional)</label>
                     <input type="text" id="hidayatSource" value="Surah Ghafir | 40:60">
+                </div>
+            </div>
+
+            <!-- ===== RAMADAN SERIES FORM ===== -->
+            <div class="form-section" id="form-ramadan">
+                <div class="form-group">
+                    <label for="ramadanTitle">Series Title (e.g., Ramadan Day 01)</label>
+                    <input type="text" id="ramadanTitle" value="Ramadan Day 01">
+                </div>
+                <div class="form-group">
+                    <label for="ramadanArabic">Arabic Ayah/Text</label>
+                    <textarea id="ramadanArabic" class="arabic-input" rows="3">وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰ</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ramadanEnglish">English Translation</label>
+                    <textarea id="ramadanEnglish" rows="3">"And surely your Lord will give you so much that you will be pleased."</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ramadanReference">Reference (Optional)</label>
+                    <input type="text" id="ramadanReference" value="Surah Ad-Duḥā | 93:5">
                 </div>
             </div>
 
@@ -935,6 +969,15 @@
                     <div class="info-content" id="hidayatContentDisplay">${document.getElementById('hidayatContent').value}</div>
                     ${source ? `<div class="divider"></div><div class="reference" id="hidayatSourceDisplay">${source}</div>` : ''}
                 `;
+            } else if (currentTab === 'ramadan') {
+                typeBadge.textContent = 'RAMADAN';
+                const reference = document.getElementById('ramadanReference').value;
+                postContent.innerHTML = `
+                    <div class="ramadan-title" id="ramadanTitleDisplay">${document.getElementById('ramadanTitle').value}</div>
+                    <div class="arabic-ayah" id="ramadanArabicDisplay">${document.getElementById('ramadanArabic').value}</div>
+                    <div class="english-translation" id="ramadanEnglishDisplay">${document.getElementById('ramadanEnglish').value}</div>
+                    ${reference ? `<div class="divider"></div><div class="reference" id="ramadanReferenceDisplay">${reference}</div>` : ''}
+                `;
             } else if (currentTab === 'custom') {
                 // Hide the badge for custom posts
                 typeBadge.style.display = 'none';
@@ -986,6 +1029,13 @@
             ['hidayatTitle', 'hidayatArabic', 'hidayatContent', 'hidayatSource'].forEach(id => {
                 document.getElementById(id).addEventListener('input', () => {
                     if (currentTab === 'hidayat') updatePreview();
+                });
+            });
+
+            // Ramadan inputs
+            ['ramadanTitle', 'ramadanArabic', 'ramadanEnglish', 'ramadanReference'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    if (currentTab === 'ramadan') updatePreview();
                 });
             });
 
